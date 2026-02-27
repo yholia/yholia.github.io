@@ -162,62 +162,63 @@ export const cvData: CVData = {
     },
   ],
 
-  projects: [
-    {
-      id: "proj-1",
-      title: "AutoPilot Framework",
-      description:
-        "Open-source test automation framework built on Playwright with page object model, data-driven testing, parallel execution, and rich HTML reporting out of the box.",
-      technologies: ["Playwright", "TypeScript", "GitHub Actions", "Allure"],
-      repoUrl: "https://github.com/yholia/autopilot-framework",
-      featured: true,
-    },
-    {
-      id: "proj-2",
-      title: "API Guardian",
-      description:
-        "Lightweight API contract testing tool that auto-generates tests from OpenAPI specs. Validates response schemas, status codes, and performance SLAs in CI pipelines.",
-      technologies: ["TypeScript", "Node.js", "OpenAPI", "Jest"],
-      repoUrl: "https://github.com/yholia/api-guardian",
-      featured: true,
-    },
-    {
-      id: "proj-3",
-      title: "Flake Detector",
-      description:
-        "CI plugin that identifies and quarantines flaky tests by analyzing historical pass/fail patterns. Provides dashboards and auto-retry recommendations.",
-      technologies: ["Python", "PostgreSQL", "Docker", "React"],
-      repoUrl: "https://github.com/yholia/flake-detector",
-      featured: true,
-    },
-    {
-      id: "proj-4",
-      title: "Test Data Factory",
-      description:
-        "Configurable test data generation library that creates realistic, relational test data for databases and APIs with built-in cleanup hooks.",
-      technologies: ["TypeScript", "Faker.js", "PostgreSQL", "Redis"],
-      repoUrl: "https://github.com/yholia/test-data-factory",
-      featured: false,
-    },
-    {
-      id: "proj-5",
-      title: "QA Metrics Dashboard",
-      description:
-        "Real-time dashboard aggregating test results, code coverage, and quality KPIs from multiple CI systems into a unified view.",
-      technologies: ["React", "D3.js", "Node.js", "InfluxDB"],
-      repoUrl: "https://github.com/yholia/qa-metrics-dashboard",
-      featured: false,
-    },
-    {
-      id: "proj-6",
-      title: "Visual Diff Engine",
-      description:
-        "Pixel-perfect visual regression testing engine with AI-powered intelligent diff detection that ignores anti-aliasing and dynamic content.",
-      technologies: ["Python", "OpenCV", "TensorFlow", "Docker"],
-      repoUrl: "https://github.com/yholia/visual-diff-engine",
-      featured: false,
-    },
-  ],
+  projects: [],
+  // projects: [
+  //   {
+  //     id: "proj-1",
+  //     title: "AutoPilot Framework",
+  //     description:
+  //       "Open-source test automation framework built on Playwright with page object model, data-driven testing, parallel execution, and rich HTML reporting out of the box.",
+  //     technologies: ["Playwright", "TypeScript", "GitHub Actions", "Allure"],
+  //     repoUrl: "https://github.com/yholia/autopilot-framework",
+  //     featured: true,
+  //   },
+  //   {
+  //     id: "proj-2",
+  //     title: "API Guardian",
+  //     description:
+  //       "Lightweight API contract testing tool that auto-generates tests from OpenAPI specs. Validates response schemas, status codes, and performance SLAs in CI pipelines.",
+  //     technologies: ["TypeScript", "Node.js", "OpenAPI", "Jest"],
+  //     repoUrl: "https://github.com/yholia/api-guardian",
+  //     featured: true,
+  //   },
+  //   {
+  //     id: "proj-3",
+  //     title: "Flake Detector",
+  //     description:
+  //       "CI plugin that identifies and quarantines flaky tests by analyzing historical pass/fail patterns. Provides dashboards and auto-retry recommendations.",
+  //     technologies: ["Python", "PostgreSQL", "Docker", "React"],
+  //     repoUrl: "https://github.com/yholia/flake-detector",
+  //     featured: true,
+  //   },
+  //   {
+  //     id: "proj-4",
+  //     title: "Test Data Factory",
+  //     description:
+  //       "Configurable test data generation library that creates realistic, relational test data for databases and APIs with built-in cleanup hooks.",
+  //     technologies: ["TypeScript", "Faker.js", "PostgreSQL", "Redis"],
+  //     repoUrl: "https://github.com/yholia/test-data-factory",
+  //     featured: false,
+  //   },
+  //   {
+  //     id: "proj-5",
+  //     title: "QA Metrics Dashboard",
+  //     description:
+  //       "Real-time dashboard aggregating test results, code coverage, and quality KPIs from multiple CI systems into a unified view.",
+  //     technologies: ["React", "D3.js", "Node.js", "InfluxDB"],
+  //     repoUrl: "https://github.com/yholia/qa-metrics-dashboard",
+  //     featured: false,
+  //   },
+  //   {
+  //     id: "proj-6",
+  //     title: "Visual Diff Engine",
+  //     description:
+  //       "Pixel-perfect visual regression testing engine with AI-powered intelligent diff detection that ignores anti-aliasing and dynamic content.",
+  //     technologies: ["Python", "OpenCV", "TensorFlow", "Docker"],
+  //     repoUrl: "https://github.com/yholia/visual-diff-engine",
+  //     featured: false,
+  //   },
+  // ],
 
   education: [
     {
