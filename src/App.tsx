@@ -28,7 +28,9 @@ export default function App() {
         <Experience experience={cvData.experience} />
         <Projects projects={cvData.projects} />
         <Education education={cvData.education} />
-        <Certifications certifications={cvData.certifications} />
+        {cvData.certifications.length > 0 && (
+          <Certifications certifications={cvData.certifications} />
+        )}
         <Contact personal={cvData.personal} />
       </main>
       <Footer socials={cvData.personal.socials} />
