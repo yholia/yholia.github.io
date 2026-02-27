@@ -121,3 +121,141 @@
     rgba(0, 229, 191, 0.03) 5px
   );
 }
+
+/* ===== Print styles for PDF export ===== */
+@media print {
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  /* Light theme reset */
+  html,
+  body {
+    background: white !important;
+    color: #1a1a1a !important;
+    font-size: 11px !important;
+    overflow: visible !important;
+  }
+
+  /* Hide decorative / interactive chrome */
+  nav,
+  footer,
+  .noise-overlay::before,
+  .grid-pattern,
+  .section-divider::after,
+  .glow-teal,
+  .glow-warm,
+  .stripe-accent,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  /* Fix gradient text → solid dark */
+  .text-gradient-teal,
+  .text-gradient-warm,
+  .text-gradient-mixed {
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    color: #1a1a1a !important;
+  }
+
+  /* Strip glassmorphism from cards */
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Reset dark backgrounds */
+  [class*="bg-bg-"] {
+    background-color: transparent !important;
+  }
+
+  /* Borders: subtle gray for structure */
+  [class*="border-border"],
+  [class*="border-accent"],
+  [class*="border-accent-warm"] {
+    border-color: #d1d5db !important;
+  }
+
+  /* Text colors for print */
+  [class*="text-text-primary"] {
+    color: #1a1a1a !important;
+  }
+  [class*="text-text-secondary"] {
+    color: #374151 !important;
+  }
+  [class*="text-text-muted"] {
+    color: #6b7280 !important;
+  }
+  [class*="text-accent"] {
+    color: #1a1a1a !important;
+  }
+
+  /* Hero: compact header instead of full viewport */
+  #hero {
+    min-height: auto !important;
+    padding: 0 0 8mm !important;
+  }
+
+  /* Sections: compact spacing */
+  section {
+    padding: 4mm 0 !important;
+    page-break-inside: avoid;
+  }
+
+  /* Prevent breaks inside cards and timeline items */
+  [class*="rounded-xl"],
+  [class*="rounded-2xl"],
+  li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Skill bars: ensure the fill is visible */
+  [class*="bg-gradient-to-r"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: #374151 !important;
+  }
+  [class*="bg-bg-elevated"] {
+    background-color: #e5e7eb !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Accent-colored elements: print as dark */
+  [class*="bg-accent"] {
+    background-color: #374151 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color: white !important;
+  }
+
+  /* Links: show URL for print */
+  a[href^="mailto:"]::after {
+    content: none;
+  }
+  a {
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+  }
+
+  /* Reset any transform/opacity from animations */
+  [style*="transform"],
+  [style*="opacity"] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure all Motion-animated elements are visible */
+  [data-motion],
+  [style*="will-change"] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

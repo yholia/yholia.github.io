@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { FiDownload } from "react-icons/fi";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -52,6 +53,14 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
+            <button
+              onClick={() => window.print()}
+              aria-label="Download PDF"
+              className="ml-2 flex items-center gap-1.5 rounded-md border border-accent/20 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:border-accent/40 hover:bg-accent/5"
+            >
+              <FiDownload size={12} />
+              PDF
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -88,6 +97,23 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
+            <motion.button
+              onClick={() => {
+                setMobileOpen(false);
+                window.print();
+              }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                delay: navLinks.length * 0.06,
+                type: "spring",
+                damping: 20,
+              }}
+              className="mt-4 flex items-center gap-2 rounded-lg border border-accent/30 px-5 py-2.5 font-mono text-sm uppercase tracking-widest text-accent transition-colors hover:bg-accent/5"
+            >
+              <FiDownload size={16} />
+              Download PDF
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>

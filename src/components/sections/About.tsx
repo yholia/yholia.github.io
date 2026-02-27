@@ -46,9 +46,9 @@ function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProp
 }
 
 const stats: { value: number; suffix: string; label: string; accent: "teal" | "warm" }[] = [
-  { value: 7, suffix: "+", label: "Years Experience", accent: "teal" },
+  { value: 9, suffix: "+", label: "Years Experience", accent: "teal" },
   { value: 15, suffix: "+", label: "Projects Delivered", accent: "warm" },
-  { value: 8, suffix: "", label: "Engineers Mentored", accent: "teal" },
+  { value: 9, suffix: "", label: "Engineers Mentored", accent: "teal" },
   { value: 60, suffix: "%", label: "Regression Saved", accent: "warm" },
 ];
 

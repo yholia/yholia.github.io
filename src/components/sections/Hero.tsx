@@ -89,10 +89,12 @@ export default function Hero({ personal }: HeroProps) {
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden px-6"
     >
-      <ParticleBackground count={35} />
+      <div data-print-hide>
+        <ParticleBackground count={35} />
+      </div>
 
       {/* Grid pattern overlay */}
-      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
+      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" data-print-hide />
 
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
         {/* Text — left-aligned, not centered */}
@@ -154,6 +156,7 @@ export default function Hero({ personal }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.9 }}
             className="mb-8 flex flex-wrap gap-3"
+            data-print-hide
           >
             <a
               href="#projects"
@@ -190,6 +193,7 @@ export default function Hero({ personal }: HeroProps) {
             delay: 0.3,
           }}
           className="flex justify-center"
+          data-print-hide
         >
           <GeometricVisual />
         </motion.div>
@@ -206,6 +210,7 @@ export default function Hero({ personal }: HeroProps) {
         }}
         className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
         aria-label="Scroll down"
+        data-print-hide
       >
         <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-text-muted">
           Scroll
