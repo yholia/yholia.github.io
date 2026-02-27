@@ -8,6 +8,7 @@ interface SectionWrapperProps {
   subtitle?: string;
   children: ReactNode;
   className?: string;
+  accent?: "teal" | "warm";
 }
 
 export default function SectionWrapper({
@@ -16,27 +17,38 @@ export default function SectionWrapper({
   subtitle,
   children,
   className,
+  accent = "teal",
 }: SectionWrapperProps) {
   return (
     <section
       id={id}
-      className={cn("px-4 py-20 md:py-32", className)}
+      className={cn("section-divider relative px-6 py-16 md:py-24", className)}
     >
       <div className="mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center md:mb-16"
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 md:mb-14"
         >
-          <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
-            <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
-              {title}
+          <div className="flex items-center gap-4 mb-3">
+            <div className={cn(
+              "h-px flex-1 max-w-12",
+              accent === "teal" ? "bg-accent/50" : "bg-accent-warm/50"
+            )} />
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted">
+              {id.replace("-", " ")}
             </span>
+          </div>
+          <h2 className={cn(
+            "font-display text-3xl font-bold tracking-tight md:text-5xl",
+            accent === "teal" ? "text-gradient-teal" : "text-gradient-warm"
+          )}>
+            {title}
           </h2>
           {subtitle && (
-            <p className="mx-auto max-w-2xl text-text-secondary">{subtitle}</p>
+            <p className="mt-3 max-w-xl text-text-secondary text-sm leading-relaxed">{subtitle}</p>
           )}
         </motion.div>
         {children}

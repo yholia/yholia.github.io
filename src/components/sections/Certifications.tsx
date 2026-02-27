@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import type { Certification } from "@/data/types";
-import { FaExternalLinkAlt, FaCertificate } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 interface CertificationsProps {
   certifications: Certification[];
@@ -16,55 +16,60 @@ export default function Certifications({
       id="certifications"
       title="Certifications"
       subtitle="Professional credentials and accreditations."
-      className="bg-bg-secondary"
     >
-      <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
-        {certifications.map((cert, i) => (
-          <AnimatedSection key={cert.id} delay={i * 0.1}>
-            <motion.div
-              whileHover={{
-                borderColor: "rgba(108, 99, 255, 0.3)",
-                boxShadow: "0 0 30px rgba(108, 99, 255, 0.08)",
-              }}
-              className="group relative overflow-hidden rounded-2xl border border-border/50 bg-bg-card/40 p-6 backdrop-blur-md"
-            >
-              {/* Shimmer effect on hover */}
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+      <div className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2">
+        {certifications.map((cert, i) => {
+          const accent = i % 2 === 0 ? "teal" : "warm";
+          return (
+            <AnimatedSection key={cert.id} delay={i * 0.08}>
+              <motion.div
+                whileHover={{
+                  borderColor:
+                    accent === "teal"
+                      ? "rgba(0, 229, 191, 0.25)"
+                      : "rgba(255, 159, 67, 0.25)",
+                  y: -2,
+                }}
+                className="group relative overflow-hidden rounded-xl border border-border/40 bg-bg-card/40 p-5 backdrop-blur-sm"
+              >
+                {/* Shimmer on hover */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.02] to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-              <div className="relative">
-                <div className="mb-3 flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                    <FaCertificate size={18} />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-sm font-bold leading-snug text-text-primary">
-                      {cert.name}
-                    </h3>
+                {/* Left accent bar */}
+                <div className={`absolute bottom-2 left-0 top-2 w-px ${
+                  accent === "teal" ? "bg-accent/30" : "bg-accent-warm/30"
+                }`} />
+
+                <div className="relative pl-3">
+                  <h3 className="mb-1 text-sm font-semibold leading-snug text-text-primary">
+                    {cert.name}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-text-secondary">{cert.issuer}</p>
+                      <p className="font-mono text-[10px] text-text-muted">
+                        {cert.date}
+                      </p>
+                    </div>
+                    {cert.credentialUrl && (
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${cert.name} credential`}
+                        className={`text-text-muted transition-colors ${
+                          accent === "teal" ? "hover:text-accent" : "hover:text-accent-warm"
+                        }`}
+                      >
+                        <FaExternalLinkAlt size={11} />
+                      </a>
+                    )}
                   </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-text-secondary">{cert.issuer}</p>
-                    <p className="font-mono text-xs text-text-muted">
-                      {cert.date}
-                    </p>
-                  </div>
-                  {cert.credentialUrl && (
-                    <a
-                      href={cert.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${cert.name} credential`}
-                      className="text-text-muted transition-colors hover:text-accent"
-                    >
-                      <FaExternalLinkAlt size={14} />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </AnimatedSection>
-        ))}
+              </motion.div>
+            </AnimatedSection>
+          );
+        })}
       </div>
     </SectionWrapper>
   );

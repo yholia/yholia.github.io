@@ -7,12 +7,12 @@ interface SkillsProps {
   skills: Skill[];
 }
 
-const categoryLabels: Record<SkillCategory, string> = {
-  automation: "Test Automation",
-  languages: "Languages",
-  tools: "Tools & Platforms",
-  "ci-cd": "CI / CD",
-  methodologies: "Methodologies",
+const categoryConfig: Record<SkillCategory, { label: string; accent: "teal" | "warm" }> = {
+  automation: { label: "Test Automation", accent: "teal" },
+  languages: { label: "Languages", accent: "warm" },
+  tools: { label: "Tools & Platforms", accent: "teal" },
+  "ci-cd": { label: "CI / CD", accent: "warm" },
+  methodologies: { label: "Methodologies", accent: "teal" },
 };
 
 const categoryOrder: SkillCategory[] = [
@@ -37,26 +37,34 @@ export default function Skills({ skills }: SkillsProps) {
       id="skills"
       title="Skills"
       subtitle="Technologies and methodologies I work with daily."
-      className="bg-bg-secondary"
+      className="stripe-accent"
     >
-      <div className="grid gap-10 md:grid-cols-2">
-        {categoryOrder.map((cat, ci) => (
-          <AnimatedSection key={cat} delay={ci * 0.1}>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
-              {categoryLabels[cat]}
-            </h3>
-            <div className="space-y-4">
-              {grouped[cat].map((skill, si) => (
-                <SkillBar
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  delay={si * 0.08}
-                />
-              ))}
-            </div>
-          </AnimatedSection>
-        ))}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {categoryOrder.map((cat, ci) => {
+          const config = categoryConfig[cat];
+          return (
+            <AnimatedSection key={cat} delay={ci * 0.08}>
+              <div className="rounded-xl border border-border/40 bg-bg-card/30 p-5">
+                <h3 className={`mb-4 font-display text-sm font-semibold uppercase tracking-wider ${
+                  config.accent === "teal" ? "text-accent" : "text-accent-warm"
+                }`}>
+                  {config.label}
+                </h3>
+                <div className="space-y-3">
+                  {grouped[cat].map((skill, si) => (
+                    <SkillBar
+                      key={skill.name}
+                      name={skill.name}
+                      level={skill.level}
+                      delay={si * 0.06}
+                      accent={config.accent}
+                    />
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          );
+        })}
       </div>
     </SectionWrapper>
   );

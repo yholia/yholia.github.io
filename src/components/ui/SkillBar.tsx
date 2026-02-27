@@ -6,9 +6,10 @@ interface SkillBarProps {
   name: string;
   level: number;
   delay?: number;
+  accent?: "teal" | "warm";
 }
 
-export default function SkillBar({ name, level, delay = 0 }: SkillBarProps) {
+export default function SkillBar({ name, level, delay = 0, accent = "teal" }: SkillBarProps) {
   const { ref, isInView } = useInViewOnce();
   const count = useMotionValue(0);
   const [displayValue, setDisplayValue] = useState(0);
@@ -22,24 +23,31 @@ export default function SkillBar({ name, level, delay = 0 }: SkillBarProps) {
 
   useEffect(() => {
     if (isInView) {
-      animate(count, level, { duration: 1.2, delay, ease: "easeOut" });
+      animate(count, level, { duration: 1, delay, ease: "easeOut" });
     }
   }, [isInView, level, delay, count]);
 
+  const gradientClass =
+    accent === "teal"
+      ? "from-accent-dark to-accent"
+      : "from-accent-warm to-accent-warm-light";
+
   return (
-    <div ref={ref} className="space-y-2">
-      <div className="flex items-center justify-between text-sm">
-        <span className="font-medium text-text-primary">{name}</span>
-        <span className="font-mono text-text-secondary">
-          {displayValue}%
+    <div ref={ref} className="group space-y-1.5">
+      <div className="flex items-center justify-between text-xs">
+        <span className="font-medium text-text-primary transition-colors group-hover:text-accent">
+          {name}
+        </span>
+        <span className="font-mono text-text-muted">
+          {displayValue}
         </span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-bg-card">
+      <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
         <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-accent-dark to-accent"
+          className={`h-full rounded-full bg-gradient-to-r ${gradientClass}`}
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: level / 100 } : { scaleX: 0 }}
-          transition={{ duration: 1.2, delay, ease: "easeOut" }}
+          transition={{ duration: 1, delay, ease: "easeOut" }}
           style={{ originX: 0 }}
         />
       </div>

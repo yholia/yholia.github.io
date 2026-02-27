@@ -14,10 +14,11 @@ interface Particle {
   opacity: number;
   duration: number;
   delay: number;
+  color: "teal" | "warm" | "white";
 }
 
 export default function ParticleBackground({
-  count = 50,
+  count = 40,
   className,
 }: ParticleBackgroundProps) {
   const particles = useMemo<Particle[]>(() => {
@@ -25,12 +26,19 @@ export default function ParticleBackground({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      opacity: Math.random() * 0.3 + 0.1,
-      duration: Math.random() * 5 + 3,
-      delay: Math.random() * 5,
+      size: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.4 + 0.1,
+      duration: Math.random() * 6 + 4,
+      delay: Math.random() * 4,
+      color: i % 5 === 0 ? "warm" : i % 3 === 0 ? "teal" : "white",
     }));
   }, [count]);
+
+  const colorMap = {
+    teal: "bg-accent",
+    warm: "bg-accent-warm",
+    white: "bg-text-muted",
+  };
 
   return (
     <div
@@ -39,7 +47,7 @@ export default function ParticleBackground({
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-accent"
+          className={`absolute rounded-full ${colorMap[p.color]}`}
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -49,8 +57,9 @@ export default function ParticleBackground({
             willChange: "transform",
           }}
           animate={{
-            y: [0, -20, 0],
-            opacity: [p.opacity, p.opacity * 1.5, p.opacity],
+            y: [0, -15, 0],
+            x: [0, Math.random() * 10 - 5, 0],
+            opacity: [p.opacity, p.opacity * 1.8, p.opacity],
           }}
           transition={{
             duration: p.duration,

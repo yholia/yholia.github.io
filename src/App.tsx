@@ -12,9 +12,16 @@ import Contact from "@/components/sections/Contact";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-bg-primary text-text-primary">
+    <div className="noise-overlay min-h-screen bg-bg-primary text-text-primary">
+      {/* Floating gradient mesh blobs */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute -left-32 top-1/4 h-[500px] w-[500px] rounded-full bg-accent/[0.04] blur-[120px]" />
+        <div className="absolute -right-32 top-2/3 h-[400px] w-[400px] rounded-full bg-accent-warm/[0.03] blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-[300px] w-[600px] rounded-full bg-accent/[0.02] blur-[80px]" />
+      </div>
+
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero personal={cvData.personal} />
         <About text={cvData.about} />
         <Skills skills={cvData.skills} />

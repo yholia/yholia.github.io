@@ -14,9 +14,10 @@ interface StatProps {
   label: string;
   delay: number;
   isInView: boolean;
+  accent: "teal" | "warm";
 }
 
-function StatCounter({ value, suffix, label, delay, isInView }: StatProps) {
+function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProps) {
   const count = useMotionValue(0);
   const [displayValue, setDisplayValue] = useState(0);
 
@@ -34,59 +35,70 @@ function StatCounter({ value, suffix, label, delay, isInView }: StatProps) {
   }, [isInView, value, delay, count]);
 
   return (
-    <GlassCard className="text-center">
-      <div className="mb-1 text-3xl font-bold text-accent">
+    <GlassCard className="text-center" accent={accent}>
+      <div className={`mb-1 font-display text-3xl font-bold ${accent === "teal" ? "text-gradient-teal" : "text-gradient-warm"}`}>
         <span>{displayValue}</span>
         <span>{suffix}</span>
       </div>
-      <p className="text-sm text-text-secondary">{label}</p>
+      <p className="font-mono text-xs uppercase tracking-wider text-text-muted">{label}</p>
     </GlassCard>
   );
 }
 
-const stats = [
-  { value: 7, suffix: "+", label: "Years Experience" },
-  { value: 15, suffix: "+", label: "Projects Delivered" },
-  { value: 8, suffix: "", label: "Engineers Mentored" },
-  { value: 60, suffix: "%", label: "Regression Time Saved" },
+const stats: { value: number; suffix: string; label: string; accent: "teal" | "warm" }[] = [
+  { value: 7, suffix: "+", label: "Years Experience", accent: "teal" },
+  { value: 15, suffix: "+", label: "Projects Delivered", accent: "warm" },
+  { value: 8, suffix: "", label: "Engineers Mentored", accent: "teal" },
+  { value: 60, suffix: "%", label: "Regression Saved", accent: "warm" },
 ];
 
 export default function About({ text }: AboutProps) {
   const { ref, isInView } = useInViewOnce();
 
   return (
-    <section id="about" className="px-4 py-20 md:py-32">
+    <section id="about" className="section-divider relative px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center md:mb-16"
+          transition={{ duration: 0.5 }}
+          className="mb-10 md:mb-14"
         >
-          <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
-            <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
-              About Me
+          <div className="flex items-center gap-4 mb-3">
+            <div className="h-px w-12 bg-accent/50" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted">
+              about
             </span>
+          </div>
+          <h2 className="font-display text-3xl font-bold tracking-tight text-gradient-teal md:text-5xl">
+            About Me
           </h2>
         </motion.div>
 
-        <div className="grid items-start gap-12 md:grid-cols-2">
+        <div className="grid items-start gap-12 md:grid-cols-[1.3fr_1fr]">
           <AnimatedSection direction="left">
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="text-base leading-[1.8] text-text-secondary">
               {text}
             </p>
+            {/* Decorative element */}
+            <div className="mt-6 flex items-center gap-3">
+              <div className="h-1 w-8 rounded-full bg-accent/30" />
+              <div className="h-1 w-4 rounded-full bg-accent-warm/30" />
+              <div className="h-1 w-2 rounded-full bg-accent/20" />
+            </div>
           </AnimatedSection>
 
-          <div ref={ref} className="grid grid-cols-2 gap-4">
+          <div ref={ref} className="grid grid-cols-2 gap-3">
             {stats.map((stat, i) => (
-              <AnimatedSection key={stat.label} delay={i * 0.1}>
+              <AnimatedSection key={stat.label} delay={i * 0.08}>
                 <StatCounter
                   value={stat.value}
                   suffix={stat.suffix}
                   label={stat.label}
-                  delay={i * 0.15}
+                  delay={i * 0.12}
                   isInView={isInView}
+                  accent={stat.accent}
                 />
               </AnimatedSection>
             ))}

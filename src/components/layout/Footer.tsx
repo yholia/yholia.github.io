@@ -8,13 +8,14 @@ interface FooterProps {
 
 export default function Footer({ socials }: FooterProps) {
   return (
-    <footer className="border-t border-border/30 px-4 py-10">
+    <footer className="relative z-10 border-t border-border/20 px-6 py-8">
       <AnimatedSection>
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center">
           <SocialLinks socials={socials} size="sm" />
-          <p className="text-sm text-text-muted">
-            &copy; {new Date().getFullYear()} Holiakhovskyi Yevhen. Built with
-            React + Motion.
+          <p className="font-mono text-xs text-text-muted">
+            &copy; {new Date().getFullYear()} Holiakhovskyi Yevhen
+            <span className="mx-2 text-border-light">/</span>
+            <span className="text-accent/40">Built with React + Motion</span>
           </p>
         </div>
       </AnimatedSection>
