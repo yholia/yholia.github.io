@@ -68,7 +68,32 @@ export const cvData: CVData = {
 
   experience: [
     {
-      id: "exp-1",
+      id: "exp-3",
+      company: "Langate, Inc.",
+      role: "Software Development Engineer in Test (SDET)",
+      startDate: "Mar 2024",
+      endDate: null,
+      location: "Ukraine",
+      description:
+          "Designing and executing comprehensive test strategies, building robust automation frameworks, and ensuring software quality throughout the development lifecycle. Applying strong technical skills and testing expertise to deliver reliable, high-performance solutions.",
+      highlights: [
+      ],
+      technologies: [
+        "Java",
+        "C#",
+        "TypeScript",
+        "Selenium",
+        "Appium",
+        "JUnit",
+        "TestNG",
+        "Jenkins",
+        "TeamCity",
+        "Git",
+        "API Testing",
+      ],
+    },
+    {
+      id: "exp-2",
       company: "Akvelon, Inc.",
       role: "Lead Software Development Engineer in Test (SDET)",
       startDate: "Mar 2021",
@@ -99,7 +124,7 @@ export const cvData: CVData = {
       ],
     },
     {
-      id: "exp-2",
+      id: "exp-1",
       company: "Akvelon, Inc.",
       role: "Software Development Engineer in Test",
       startDate: "Jun 2017",
