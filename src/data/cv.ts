@@ -76,14 +76,14 @@ export const cvData: CVData = {
       endDate: null,
       location: "Ukraine",
       description:
-        "Architecting and owning a multi-layer test automation framework for an enterprise employee recognition platform serving 9+ major clients including Accenture, Siemens, and Texas Instruments. Covering E2E, UI, API, visual regression, and database testing layers.",
+        "Architecting and owning a multi-layer test automation framework for an enterprise SaaS platform serving multiple large clients. Covering E2E, UI, API, visual regression, and database testing layers.",
       highlights: [
         "Built a multi-project .NET automation suite (C# + TUnit) covering E2E, API, UI, component, integration, and database test layers",
-        "Implemented Page Object Model with custom base classes, PageFactory, and domain-organized page objects for Admin and Client portals",
+        "Implemented Page Object Model with custom base classes, PageFactory, and domain-organized page objects across multiple portal types",
         "Developed a visual regression testing module using Playwright + TypeScript with screenshot and ARIA snapshot comparisons across mobile, tablet, desktop, and wide viewports",
         "Designed a ResourceReaper cleanup pattern with LIFO stack ordering, ensuring reliable test isolation and zero resource leaks across parallel runs",
         "Integrated Entity Framework Core with Azure SQL for database-driven test data setup and verification",
-        "Configured multi-tenant test execution across 9+ enterprise clients via environment-based appsettings, enabling full regression per tenant",
+        "Configured multi-tenant test execution across multiple enterprise clients via environment-based settings, enabling full regression per tenant",
         "Generated strongly-typed API clients from server definitions; built an ApiService composition layer with token-based authentication helpers",
       ],
       technologies: [
@@ -107,15 +107,15 @@ export const cvData: CVData = {
       endDate: null,
       location: "Ukraine",
       description:
-        "Leading quality assurance for a rail container terminal management system (TC/IPRO) used by major carriers including BNSF, CSX, and others. Owning a multi-layer test suite covering integration, performance, UI, and hardware integration across 4 live terminal environments.",
+        "Leading quality assurance for a large-scale logistics management system. Owning a multi-layer test suite covering integration, performance, UI, and hardware integration across multiple live environments.",
       highlights: [
-        "Designed and grew a 239-class JUnit 5 integration test suite validating complete business workflows (waybill creation, railcar planning, track assignment, RTLS) across 4 environments",
+        "Designed and grew a 200+ class JUnit 5 integration test suite validating complete business workflows across multiple environments",
         "Built Gatling performance tests for JMS/SOAP messaging pipelines, achieving 500 msg/sec throughput, P95 latency < 50ms, and 200 concurrent users — exceeding all production targets",
-        "Engineered ActiveMQ/JMS integration with Gatling from scratch, resolving 10 major technical challenges including thread safety, Jakarta EE namespacing, XML serialization, and custom Gatling DSL wrappers",
-        "Integrated ReportPortal for structured test reporting with DEBUG/OFFICIAL launch modes and Bitbucket build status notifications via Jenkins",
-        "Automated multi-profile Maven builds with Jenkins pipelines supporting tag/class filtering and per-environment runs triggered every 30 minutes",
-        "Covered hardware integration testing via serial communication (jSerialComm) for RFID readers and gate equipment, and UI automation with Selenide",
-        "Mentored team members and enforced code quality standards via Checkstyle, AspectJ instrumentation, and Lombok-based patterns",
+        "Engineered ActiveMQ/JMS integration with Gatling from scratch, resolving major technical challenges including thread safety, XML serialization, and custom Gatling DSL wrappers",
+        "Integrated ReportPortal for structured test reporting and automated build status notifications via Jenkins",
+        "Automated multi-profile Maven builds with Jenkins pipelines supporting tag/class filtering and per-environment scheduled runs",
+        "Covered hardware integration testing via serial communication for RFID readers and gate equipment, and UI automation with Selenide",
+        "Mentored team members and enforced code quality standards via static analysis, AspectJ instrumentation, and shared coding patterns",
       ],
       technologies: [
         "Java 17",
