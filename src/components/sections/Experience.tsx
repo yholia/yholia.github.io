@@ -23,7 +23,7 @@ export default function Experience({ experience }: ExperienceProps) {
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           style={{ originY: 0 }}
-          className="absolute left-[18px] top-0 h-full w-px bg-gradient-to-b from-accent via-border-light to-accent-warm md:left-1/2 md:-translate-x-1/2"
+          className="absolute left-[18px] top-0 h-full w-px bg-gradient-to-b from-accent via-border-light to-accent-warm md:left-1/2 md:-translate-x-1/2 print:hidden"
         />
 
         <div className="space-y-10">
