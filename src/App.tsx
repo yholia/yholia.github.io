@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {cvData} from "@/data/cv";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -11,6 +12,33 @@ import Certifications from "@/components/sections/Certifications";
 import Contact from "@/components/sections/Contact";
 
 export default function App() {
+  useEffect(() => {
+    const handleBeforePrint = () => {
+      // Force all Motion-animated inline styles to their end state.
+      // whileInView animations leave opacity:0 / transform on elements that
+      // haven't scrolled into view — they'd be invisible in the PDF.
+      document.querySelectorAll<HTMLElement>("[style]").forEach((el) => {
+        el.style.setProperty("opacity", "1", "important");
+        el.style.setProperty("transform", "none", "important");
+      });
+    };
+
+    const handleAfterPrint = () => {
+      // Remove the forced overrides so Motion can resume control.
+      document.querySelectorAll<HTMLElement>("[style]").forEach((el) => {
+        el.style.removeProperty("opacity");
+        el.style.removeProperty("transform");
+      });
+    };
+
+    window.addEventListener("beforeprint", handleBeforePrint);
+    window.addEventListener("afterprint", handleAfterPrint);
+    return () => {
+      window.removeEventListener("beforeprint", handleBeforePrint);
+      window.removeEventListener("afterprint", handleAfterPrint);
+    };
+  }, []);
+
     return (
         <div className="noise-overlay min-h-screen bg-bg-primary text-text-primary">
             {/* Floating gradient mesh blobs */}

@@ -3,7 +3,6 @@ import type { PersonalInfo } from "@/data/types";
 import Typewriter from "@/components/ui/Typewriter";
 import ParticleBackground from "@/components/ui/ParticleBackground";
 import SocialLinks from "@/components/ui/SocialLinks";
-import { FaChevronDown } from "react-icons/fa";
 
 interface HeroProps {
   personal: PersonalInfo;
@@ -198,25 +197,6 @@ export default function Hero({ personal }: HeroProps) {
           <GeometricVisual />
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 6, 0] }}
-        transition={{
-          opacity: { delay: 2, duration: 0.5 },
-          y: { delay: 2, duration: 2, repeat: Infinity },
-        }}
-        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
-        aria-label="Scroll down"
-        data-print-hide
-      >
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-text-muted">
-          Scroll
-        </span>
-        <FaChevronDown size={12} className="text-text-muted" />
-      </motion.a>
     </section>
   );
 }

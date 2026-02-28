@@ -38,9 +38,9 @@ export default function SkillBar({ name, level, delay = 0, accent = "teal" }: Sk
         <span className="font-medium text-text-primary transition-colors group-hover:text-accent">
           {name}
         </span>
-        <span className="font-mono text-text-muted">
-          {displayValue}
-        </span>
+        {/* Screen: animated counter. Print: actual level value. */}
+        <span className="font-mono text-text-muted print:hidden">{displayValue}</span>
+        <span className="hidden font-mono text-text-muted print:inline">{level}</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
         <motion.div
@@ -48,7 +48,7 @@ export default function SkillBar({ name, level, delay = 0, accent = "teal" }: Sk
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: level / 100 } : { scaleX: 0 }}
           transition={{ duration: 1, delay, ease: "easeOut" }}
-          style={{ originX: 0 }}
+          style={{ originX: 0, ["--bar-width" as string]: `${level}%` }}
         />
       </div>
     </div>
