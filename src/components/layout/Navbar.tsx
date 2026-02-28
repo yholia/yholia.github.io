@@ -14,9 +14,16 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-function printAfterScroll() {
-  window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" });
-  setTimeout(() => window.print(), 600);
+function triggerPrint() {
+  // Add class BEFORE print so the stylesheet rule (which beats React's inline styles)
+  // forces all Motion-animated elements to opacity:1 / transform:none.
+  // Two rAF calls ensure the browser applies the new computed styles before print capture.
+  document.documentElement.classList.add("printing-now");
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+    });
+  });
 }
 
 export default function Navbar() {
@@ -59,7 +66,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <button
-              onClick={printAfterScroll}
+              onClick={triggerPrint}
               aria-label="Download PDF"
               className="ml-2 flex items-center gap-1.5 rounded-md border border-accent/20 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
@@ -105,7 +112,7 @@ export default function Navbar() {
             <motion.button
               onClick={() => {
                 setMobileOpen(false);
-                printAfterScroll();
+                triggerPrint();
               }}
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}

@@ -14,23 +14,13 @@ import Contact from "@/components/sections/Contact";
 export default function App() {
   useEffect(() => {
     const handleBeforePrint = () => {
-      // Force all Motion-animated inline styles to their end state.
-      // whileInView animations leave opacity:0 / transform on elements that
-      // haven't scrolled into view — they'd be invisible in the PDF.
-      document.querySelectorAll<HTMLElement>("[style]").forEach((el) => {
-        el.style.setProperty("opacity", "1", "important");
-        el.style.setProperty("transform", "none", "important");
-      });
+      // Belt-and-suspenders: ensure the class is present even if print is triggered
+      // by the browser's native Ctrl+P shortcut (not the PDF button).
+      document.documentElement.classList.add("printing-now");
     };
 
     const handleAfterPrint = () => {
-      // Remove the forced overrides so Motion can resume control.
-      document.querySelectorAll<HTMLElement>("[style]").forEach((el) => {
-        el.style.removeProperty("opacity");
-        el.style.removeProperty("transform");
-      });
-      // Restore scroll position to top.
-      window.scrollTo({ top: 0, behavior: "instant" });
+      document.documentElement.classList.remove("printing-now");
     };
 
     window.addEventListener("beforeprint", handleBeforePrint);

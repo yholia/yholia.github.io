@@ -122,6 +122,12 @@
   );
 }
 
+/* Applied via JS before window.print() — stylesheet !important beats Motion's inline opacity/transform */
+html.printing-now * {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ===== Print styles for PDF export ===== */
 @media print {
   /* Page setup */
