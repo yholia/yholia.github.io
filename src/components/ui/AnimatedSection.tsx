@@ -34,15 +34,20 @@ export default function AnimatedSection({
   };
 
   return (
-    <motion.div
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "-80px" }}
-      transition={{ duration, delay, ease: "easeOut" }}
-      className={cn(className)}
-    >
-      {children}
-    </motion.div>
+    <>
+      {/* Screen: animated. Hidden in print so opacity:0 doesn't blank the content. */}
+      <motion.div
+        variants={variants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once, margin: "-80px" }}
+        transition={{ duration, delay, ease: "easeOut" }}
+        className={cn(className, "print:hidden")}
+      >
+        {children}
+      </motion.div>
+      {/* Print: static copy, always visible. */}
+      <div className={cn(className, "hidden print:block")}>{children}</div>
+    </>
   );
 }
