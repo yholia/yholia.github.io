@@ -39,8 +39,8 @@ export default function SkillBar({ name, level, delay = 0, accent = "teal" }: Sk
           {name}
         </span>
         {/* Screen: animated counter. Print: actual level value. */}
-        <span className="font-mono text-text-muted print:hidden">{displayValue}</span>
-        <span className="hidden font-mono text-text-muted print:inline">{level}</span>
+        <span className="font-mono text-text-muted" data-print-hide>{displayValue}</span>
+        <span className="font-mono text-text-muted" data-print-only>{level}</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
         <motion.div

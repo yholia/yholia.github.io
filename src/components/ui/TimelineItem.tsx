@@ -76,20 +76,24 @@ export default function TimelineItem({
         isEven ? "md:justify-start" : "md:justify-end"
       }`}
     >
-      {/* Timeline dot — screen only */}
+      {/* Timeline dot — screen: animated */}
       <motion.div
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: index * 0.12 }}
-        className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2 print:hidden"
+        className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2"
+        data-print-hide
       >
         <div className={`h-3 w-3 rounded-full border-2 ${
           isEven ? "border-accent bg-accent/20" : "border-accent-warm bg-accent-warm/20"
         }`} />
       </motion.div>
-      {/* Static dot — print only */}
-      <div className="absolute left-4 top-6 z-10 hidden md:left-1/2 md:-translate-x-1/2 print:block">
+      {/* Timeline dot — print: static */}
+      <div
+        className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2"
+        data-print-only
+      >
         <div className={`h-3 w-3 rounded-full border-2 ${
           isEven ? "border-accent bg-accent/20" : "border-accent-warm bg-accent-warm/20"
         }`} />
@@ -101,12 +105,13 @@ export default function TimelineItem({
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
-        className={`${cardClass} print:hidden`}
+        className={cardClass}
+        data-print-hide
       >
         {cardContent}
       </motion.div>
       {/* Content card — print: static */}
-      <div className={`${cardClass} hidden print:block`}>
+      <div className={cardClass} data-print-only>
         {cardContent}
       </div>
     </div>

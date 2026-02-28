@@ -37,8 +37,8 @@ function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProp
     <GlassCard className="text-center" accent={accent}>
       <div className={`mb-1 font-display text-3xl font-bold ${accent === "teal" ? "text-gradient-teal" : "text-gradient-warm"}`}>
         {/* Screen: animated counter. Print: actual value. */}
-        <span className="print:hidden">{displayValue}</span>
-        <span className="hidden print:inline">{value}</span>
+        <span data-print-hide>{displayValue}</span>
+        <span data-print-only>{value}</span>
         <span>{suffix}</span>
       </div>
       <p className="font-mono text-xs uppercase tracking-wider text-text-muted">{label}</p>
@@ -56,6 +56,20 @@ const stats: { value: number; suffix: string; label: string; accent: "teal" | "w
 export default function About({ text }: AboutProps) {
   const { ref, isInView } = useInViewOnce();
 
+  const heading = (
+    <>
+      <div className="flex items-center gap-4 mb-3">
+        <div className="h-px w-12 bg-accent/50" />
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted">
+          about
+        </span>
+      </div>
+      <h2 className="font-display text-3xl font-bold tracking-tight text-gradient-teal md:text-5xl">
+        About Me
+      </h2>
+    </>
+  );
+
   return (
     <section id="about" className="section-divider relative px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
@@ -65,29 +79,14 @@ export default function About({ text }: AboutProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-10 md:mb-14 print:hidden"
+          className="mb-10 md:mb-14"
+          data-print-hide
         >
-          <div className="flex items-center gap-4 mb-3">
-            <div className="h-px w-12 bg-accent/50" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted">
-              about
-            </span>
-          </div>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-gradient-teal md:text-5xl">
-            About Me
-          </h2>
+          {heading}
         </motion.div>
         {/* Print: static heading */}
-        <div className="mb-10 hidden print:block">
-          <div className="flex items-center gap-4 mb-3">
-            <div className="h-px w-12 bg-accent/50" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted">
-              about
-            </span>
-          </div>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-gradient-teal md:text-5xl">
-            About Me
-          </h2>
+        <div className="mb-10 md:mb-14" data-print-only>
+          {heading}
         </div>
 
         <div className="grid items-start gap-12 md:grid-cols-[1.3fr_1fr]">

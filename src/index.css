@@ -128,6 +128,16 @@ html.printing-now * {
   transform: none !important;
 }
 
+/* Print-only static fallbacks: hidden on screen, visible in print.
+   Using @media screen (non-layered) so Chromium includes these elements
+   in the print layout tree from the start — @layer utilities print:block
+   cannot add elements that were already excluded from layout. */
+@media screen {
+  [data-print-only] {
+    display: none !important;
+  }
+}
+
 /* ===== Print styles for PDF export ===== */
 @media print {
   /* Page setup */

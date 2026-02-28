@@ -35,19 +35,23 @@ export default function AnimatedSection({
 
   return (
     <>
-      {/* Screen: animated. Hidden in print so opacity:0 doesn't blank the content. */}
+      {/* Screen: animated. data-print-hide removes it from print layout entirely. */}
       <motion.div
         variants={variants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once, margin: "-80px" }}
         transition={{ duration, delay, ease: "easeOut" }}
-        className={cn(className, "print:hidden")}
+        className={cn(className)}
+        data-print-hide
       >
         {children}
       </motion.div>
-      {/* Print: static copy, always visible. */}
-      <div className={cn(className, "hidden print:block")}>{children}</div>
+      {/* Print: static copy. data-print-only hides on screen via @media screen rule,
+          so Chromium includes it in the print layout tree from the start. */}
+      <div className={cn(className)} data-print-only>
+        {children}
+      </div>
     </>
   );
 }

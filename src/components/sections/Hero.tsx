@@ -98,32 +98,34 @@ export default function Hero({ personal }: HeroProps) {
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
         {/* Text — left-aligned, not centered */}
         <div>
-          {/* Screen: animated title label */}
+          {/* Title label — screen: animated */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-4 flex items-center gap-3 print:hidden"
+            className="mb-4 flex items-center gap-3"
+            data-print-hide
           >
             <div className="h-px w-8 bg-accent" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
               {personal.title}
             </span>
           </motion.div>
-          {/* Print: static title label */}
-          <div className="mb-4 hidden flex items-center gap-3 print:flex">
+          {/* Title label — print: static */}
+          <div className="mb-4 flex items-center gap-3" data-print-only>
             <div className="h-px w-8 bg-accent" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
               {personal.title}
             </span>
           </div>
 
-          {/* Screen: animated name */}
+          {/* Name — screen: animated */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl print:hidden"
+            className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
+            data-print-hide
           >
             <span className="text-gradient-teal">
               {personal.name.split(" ")[0]}
@@ -133,8 +135,11 @@ export default function Hero({ personal }: HeroProps) {
               {personal.name.split(" ").slice(1).join(" ")}
             </span>
           </motion.h1>
-          {/* Print: static name */}
-          <h1 className="mb-2 hidden font-display text-4xl font-extrabold leading-[1.05] tracking-tight print:block">
+          {/* Name — print: static */}
+          <h1
+            className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight"
+            data-print-only
+          >
             <span className="text-gradient-teal">
               {personal.name.split(" ")[0]}
             </span>
@@ -144,12 +149,13 @@ export default function Hero({ personal }: HeroProps) {
             </span>
           </h1>
 
-          {/* Screen: typewriter — print: static role */}
+          {/* Typewriter — screen only */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="mb-5 font-mono text-sm text-text-secondary md:text-base print:hidden"
+            className="mb-5 font-mono text-sm text-text-secondary md:text-base"
+            data-print-hide
           >
             <Typewriter
               words={[
@@ -160,24 +166,27 @@ export default function Hero({ personal }: HeroProps) {
               ]}
             />
           </motion.div>
-          <div className="mb-5 hidden font-mono text-sm text-text-secondary print:block">
+          {/* Role — print: static */}
+          <div className="mb-5 font-mono text-sm text-text-secondary" data-print-only>
             Test Automation Architect
           </div>
 
-          {/* Screen: animated tagline */}
+          {/* Tagline — screen: animated */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="mb-8 max-w-md text-sm leading-relaxed text-text-muted print:hidden"
+            className="mb-8 max-w-md text-sm leading-relaxed text-text-muted"
+            data-print-hide
           >
             {personal.tagline}
           </motion.p>
-          {/* Print: static tagline */}
-          <p className="mb-8 hidden max-w-md text-sm leading-relaxed text-text-muted print:block">
+          {/* Tagline — print: static */}
+          <p className="mb-8 max-w-md text-sm leading-relaxed text-text-muted" data-print-only>
             {personal.tagline}
           </p>
 
+          {/* CTA buttons — screen only */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -200,22 +209,22 @@ export default function Hero({ personal }: HeroProps) {
             </a>
           </motion.div>
 
-          {/* Screen: animated social links */}
+          {/* Social links — screen: animated */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.1 }}
-            className="print:hidden"
+            data-print-hide
           >
             <SocialLinks socials={personal.socials} />
           </motion.div>
-          {/* Print: static social links */}
-          <div className="hidden print:block">
+          {/* Social links — print: static */}
+          <div data-print-only>
             <SocialLinks socials={personal.socials} />
           </div>
         </div>
 
-        {/* Geometric visual — right side */}
+        {/* Geometric visual — screen only */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85, rotate: -5 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
