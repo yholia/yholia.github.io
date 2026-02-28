@@ -30,7 +30,7 @@
     color: var(--color-text-primary);
   }
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), serif;
     margin: 0;
     overflow-x: hidden;
   }
@@ -150,6 +150,7 @@
     text-shadow: none !important;
     /* Force all animated elements visible (belt-and-suspenders alongside JS) */
     opacity: 1 !important;
+    transform: none !important;
     animation: none !important;
     transition: none !important;
   }

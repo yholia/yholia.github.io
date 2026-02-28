@@ -1,8 +1,8 @@
-import { motion, useMotionValue, animate } from "motion/react";
-import { useEffect, useState } from "react";
+import {animate, motion, useMotionValue} from "motion/react";
+import {useEffect, useState} from "react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GlassCard from "@/components/ui/GlassCard";
-import { useInViewOnce } from "@/hooks/useInViewOnce";
+import {useInViewOnce} from "@/hooks/useInViewOnce";
 
 interface AboutProps {
   text: string;
@@ -22,10 +22,9 @@ function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProp
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = count.on("change", (v) => {
+    return count.on("change", (v) => {
       setDisplayValue(Math.round(v));
     });
-    return unsubscribe;
   }, [count]);
 
   useEffect(() => {
@@ -37,7 +36,9 @@ function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProp
   return (
     <GlassCard className="text-center" accent={accent}>
       <div className={`mb-1 font-display text-3xl font-bold ${accent === "teal" ? "text-gradient-teal" : "text-gradient-warm"}`}>
-        <span>{displayValue}</span>
+        {/* Screen: animated counter. Print: actual value. */}
+        <span className="print:hidden">{displayValue}</span>
+        <span className="hidden print:inline">{value}</span>
         <span>{suffix}</span>
       </div>
       <p className="font-mono text-xs uppercase tracking-wider text-text-muted">{label}</p>
