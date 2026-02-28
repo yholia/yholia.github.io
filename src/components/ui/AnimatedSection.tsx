@@ -1,6 +1,7 @@
 import { motion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
+import { usePrintMode } from "@/contexts/PrintContext";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -26,7 +27,12 @@ export default function AnimatedSection({
   className,
   once = true,
 }: AnimatedSectionProps) {
+  const isPrinting = usePrintMode();
   const offset = offsets[direction];
+
+  if (isPrinting) {
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   const variants: Variants = {
     hidden: { opacity: 0, ...offset },
@@ -34,24 +40,15 @@ export default function AnimatedSection({
   };
 
   return (
-    <>
-      {/* Screen: animated. data-print-hide removes it from print layout entirely. */}
-      <motion.div
-        variants={variants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once, margin: "-80px" }}
-        transition={{ duration, delay, ease: "easeOut" }}
-        className={cn(className)}
-        data-print-hide
-      >
-        {children}
-      </motion.div>
-      {/* Print: static copy. data-print-only hides on screen via @media screen rule,
-          so Chromium includes it in the print layout tree from the start. */}
-      <div className={cn(className)} data-print-only>
-        {children}
-      </div>
-    </>
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, margin: "-80px" }}
+      transition={{ duration, delay, ease: "easeOut" }}
+      className={cn(className)}
+    >
+      {children}
+    </motion.div>
   );
 }

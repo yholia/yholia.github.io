@@ -3,6 +3,7 @@ import type { PersonalInfo } from "@/data/types";
 import Typewriter from "@/components/ui/Typewriter";
 import ParticleBackground from "@/components/ui/ParticleBackground";
 import SocialLinks from "@/components/ui/SocialLinks";
+import { usePrintMode } from "@/contexts/PrintContext";
 
 interface HeroProps {
   personal: PersonalInfo;
@@ -83,6 +84,35 @@ function GeometricVisual() {
 }
 
 export default function Hero({ personal }: HeroProps) {
+  const isPrinting = usePrintMode();
+
+  if (isPrinting) {
+    return (
+      <section id="hero" className="relative px-6 py-12">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="h-px w-8 bg-accent" />
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+              {personal.title}
+            </span>
+          </div>
+          <h1 className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight">
+            <span className="text-gradient-teal">{personal.name.split(" ")[0]}</span>
+            {" "}
+            <span className="text-text-primary">{personal.name.split(" ").slice(1).join(" ")}</span>
+          </h1>
+          <div className="mb-4 font-mono text-sm text-text-secondary">
+            Test Automation Architect
+          </div>
+          <p className="mb-6 max-w-md text-sm leading-relaxed text-text-muted">
+            {personal.tagline}
+          </p>
+          <SocialLinks socials={personal.socials} />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="hero"
@@ -98,34 +128,23 @@ export default function Hero({ personal }: HeroProps) {
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
         {/* Text — left-aligned, not centered */}
         <div>
-          {/* Title label — screen: animated */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-4 flex items-center gap-3"
-            data-print-hide
           >
             <div className="h-px w-8 bg-accent" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
               {personal.title}
             </span>
           </motion.div>
-          {/* Title label — print: static */}
-          <div className="mb-4 flex items-center gap-3" data-print-only>
-            <div className="h-px w-8 bg-accent" />
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-              {personal.title}
-            </span>
-          </div>
 
-          {/* Name — screen: animated */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
-            data-print-hide
           >
             <span className="text-gradient-teal">
               {personal.name.split(" ")[0]}
@@ -135,27 +154,12 @@ export default function Hero({ personal }: HeroProps) {
               {personal.name.split(" ").slice(1).join(" ")}
             </span>
           </motion.h1>
-          {/* Name — print: static */}
-          <h1
-            className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight"
-            data-print-only
-          >
-            <span className="text-gradient-teal">
-              {personal.name.split(" ")[0]}
-            </span>
-            {" "}
-            <span className="text-text-primary">
-              {personal.name.split(" ").slice(1).join(" ")}
-            </span>
-          </h1>
 
-          {/* Typewriter — screen only */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mb-5 font-mono text-sm text-text-secondary md:text-base"
-            data-print-hide
           >
             <Typewriter
               words={[
@@ -166,33 +170,21 @@ export default function Hero({ personal }: HeroProps) {
               ]}
             />
           </motion.div>
-          {/* Role — print: static */}
-          <div className="mb-5 font-mono text-sm text-text-secondary" data-print-only>
-            Test Automation Architect
-          </div>
 
-          {/* Tagline — screen: animated */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7 }}
             className="mb-8 max-w-md text-sm leading-relaxed text-text-muted"
-            data-print-hide
           >
             {personal.tagline}
           </motion.p>
-          {/* Tagline — print: static */}
-          <p className="mb-8 max-w-md text-sm leading-relaxed text-text-muted" data-print-only>
-            {personal.tagline}
-          </p>
 
-          {/* CTA buttons — screen only */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.9 }}
             className="mb-8 flex flex-wrap gap-3"
-            data-print-hide
           >
             <a
               href="#projects"
@@ -209,19 +201,13 @@ export default function Hero({ personal }: HeroProps) {
             </a>
           </motion.div>
 
-          {/* Social links — screen: animated */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.1 }}
-            data-print-hide
           >
             <SocialLinks socials={personal.socials} />
           </motion.div>
-          {/* Social links — print: static */}
-          <div data-print-only>
-            <SocialLinks socials={personal.socials} />
-          </div>
         </div>
 
         {/* Geometric visual — screen only */}

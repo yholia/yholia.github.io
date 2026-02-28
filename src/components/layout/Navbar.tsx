@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiDownload } from "react-icons/fi";
+import { useTriggerPrint } from "@/contexts/PrintContext";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -14,21 +15,10 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-function triggerPrint() {
-  // Add class BEFORE print so the stylesheet rule (which beats React's inline styles)
-  // forces all Motion-animated elements to opacity:1 / transform:none.
-  // Two rAF calls ensure the browser applies the new computed styles before print capture.
-  document.documentElement.classList.add("printing-now");
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      window.print();
-    });
-  });
-}
-
 export default function Navbar() {
   const { isScrolled } = useScrollProgress();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const triggerPrint = useTriggerPrint();
 
   return (
     <>

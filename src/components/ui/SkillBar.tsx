@@ -1,6 +1,7 @@
 import { motion, useMotionValue, animate } from "motion/react";
 import { useEffect, useState } from "react";
 import { useInViewOnce } from "@/hooks/useInViewOnce";
+import { usePrintMode } from "@/contexts/PrintContext";
 
 interface SkillBarProps {
   name: string;
@@ -10,6 +11,7 @@ interface SkillBarProps {
 }
 
 export default function SkillBar({ name, level, delay = 0, accent = "teal" }: SkillBarProps) {
+  const isPrinting = usePrintMode();
   const { ref, isInView } = useInViewOnce();
   const count = useMotionValue(0);
   const [displayValue, setDisplayValue] = useState(0);
@@ -32,15 +34,30 @@ export default function SkillBar({ name, level, delay = 0, accent = "teal" }: Sk
       ? "from-accent-dark to-accent"
       : "from-accent-warm to-accent-warm-light";
 
+  if (isPrinting) {
+    return (
+      <div className="group space-y-1.5">
+        <div className="flex items-center justify-between text-xs">
+          <span className="font-medium text-text-primary">{name}</span>
+          <span className="font-mono text-text-muted">{level}</span>
+        </div>
+        <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
+          <div
+            className={`h-full rounded-full bg-gradient-to-r ${gradientClass}`}
+            style={{ width: `${level}%` }}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div ref={ref} className="group space-y-1.5">
       <div className="flex items-center justify-between text-xs">
         <span className="font-medium text-text-primary transition-colors group-hover:text-accent">
           {name}
         </span>
-        {/* Screen: animated counter. Print: actual level value. */}
-        <span className="font-mono text-text-muted" data-print-hide>{displayValue}</span>
-        <span className="font-mono text-text-muted" data-print-only>{level}</span>
+        <span className="font-mono text-text-muted">{displayValue}</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
         <motion.div
@@ -48,7 +65,7 @@ export default function SkillBar({ name, level, delay = 0, accent = "teal" }: Sk
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: level / 100 } : { scaleX: 0 }}
           transition={{ duration: 1, delay, ease: "easeOut" }}
-          style={{ originX: 0, ["--bar-width" as string]: `${level}%` }}
+          style={{ originX: 0 }}
         />
       </div>
     </div>

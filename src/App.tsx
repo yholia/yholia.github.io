@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {cvData} from "@/data/cv";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -10,28 +9,11 @@ import Projects from "@/components/sections/Projects";
 import Education from "@/components/sections/Education";
 import Certifications from "@/components/sections/Certifications";
 import Contact from "@/components/sections/Contact";
+import { PrintProvider } from "@/contexts/PrintContext";
 
 export default function App() {
-  useEffect(() => {
-    const handleBeforePrint = () => {
-      // Belt-and-suspenders: ensure the class is present even if print is triggered
-      // by the browser's native Ctrl+P shortcut (not the PDF button).
-      document.documentElement.classList.add("printing-now");
-    };
-
-    const handleAfterPrint = () => {
-      document.documentElement.classList.remove("printing-now");
-    };
-
-    window.addEventListener("beforeprint", handleBeforePrint);
-    window.addEventListener("afterprint", handleAfterPrint);
-    return () => {
-      window.removeEventListener("beforeprint", handleBeforePrint);
-      window.removeEventListener("afterprint", handleAfterPrint);
-    };
-  }, []);
-
     return (
+        <PrintProvider>
         <div className="noise-overlay min-h-screen bg-bg-primary text-text-primary">
             {/* Floating gradient mesh blobs */}
             <div className="pointer-events-none fixed inset-0 z-0" data-print-hide>
@@ -60,5 +42,6 @@ export default function App() {
             </main>
             <Footer socials={cvData.personal.socials}/>
         </div>
+        </PrintProvider>
     );
 }

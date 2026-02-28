@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import type { Experience } from "@/data/types";
 import GlassCard from "./GlassCard";
+import { usePrintMode } from "@/contexts/PrintContext";
 
 interface TimelineItemProps {
   experience: Experience;
@@ -11,6 +12,7 @@ export default function TimelineItem({
   experience,
   index,
 }: TimelineItemProps) {
+  const isPrinting = usePrintMode();
   const isEven = index % 2 === 0;
 
   const cardContent = (
@@ -70,50 +72,52 @@ export default function TimelineItem({
     isEven ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
   }`;
 
+  const dot = (
+    <div className={`h-3 w-3 rounded-full border-2 ${
+      isEven ? "border-accent bg-accent/20" : "border-accent-warm bg-accent-warm/20"
+    }`} />
+  );
+
+  if (isPrinting) {
+    return (
+      <div
+        className={`relative flex w-full items-start ${
+          isEven ? "md:justify-start" : "md:justify-end"
+        }`}
+      >
+        <div className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2">
+          {dot}
+        </div>
+        <div className={cardClass}>{cardContent}</div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative flex w-full items-start ${
         isEven ? "md:justify-start" : "md:justify-end"
       }`}
     >
-      {/* Timeline dot — screen: animated */}
       <motion.div
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: index * 0.12 }}
         className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2"
-        data-print-hide
       >
-        <div className={`h-3 w-3 rounded-full border-2 ${
-          isEven ? "border-accent bg-accent/20" : "border-accent-warm bg-accent-warm/20"
-        }`} />
+        {dot}
       </motion.div>
-      {/* Timeline dot — print: static */}
-      <div
-        className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2"
-        data-print-only
-      >
-        <div className={`h-3 w-3 rounded-full border-2 ${
-          isEven ? "border-accent bg-accent/20" : "border-accent-warm bg-accent-warm/20"
-        }`} />
-      </div>
 
-      {/* Content card — screen: animated */}
       <motion.div
         initial={{ opacity: 0, x: isEven ? -40 : 40 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
         className={cardClass}
-        data-print-hide
       >
         {cardContent}
       </motion.div>
-      {/* Content card — print: static */}
-      <div className={cardClass} data-print-only>
-        {cardContent}
-      </div>
     </div>
   );
 }
