@@ -29,6 +29,8 @@ export default function App() {
         el.style.removeProperty("opacity");
         el.style.removeProperty("transform");
       });
+      // Restore scroll position to top.
+      window.scrollTo({ top: 0, behavior: "instant" });
     };
 
     window.addEventListener("beforeprint", handleBeforePrint);
