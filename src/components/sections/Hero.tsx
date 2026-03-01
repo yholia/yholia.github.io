@@ -85,7 +85,7 @@ export default function Hero({ personal }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden px-6"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 pt-20 md:pt-0"
     >
       <div data-print-hide>
         <ParticleBackground count={35} />
@@ -96,7 +96,7 @@ export default function Hero({ personal }: HeroProps) {
 
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
         {/* Text — centered on mobile, left-aligned on md+ */}
-        <div className="text-center md:text-left">
+        <div className="min-w-0 text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -113,7 +113,7 @@ export default function Hero({ personal }: HeroProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
+            className="mb-2 break-words font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
           >
             <span className="text-gradient-teal">
               {personal.name.split(" ")[0]}
