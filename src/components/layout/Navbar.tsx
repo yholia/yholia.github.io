@@ -53,14 +53,15 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
-            <button
-              onClick={() => window.print()}
+            <a
+              href="/Holiakhovskyi Yevhen — SDET Lead.pdf"
+              download
               aria-label="Download PDF"
               className="ml-2 flex items-center gap-1.5 rounded-md border border-accent/20 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
               <FiDownload size={12} />
               PDF
-            </button>
+            </a>
           </div>
 
           {/* Mobile toggle */}
@@ -97,11 +98,10 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
-            <motion.button
-              onClick={() => {
-                setMobileOpen(false);
-                window.print();
-              }}
+            <motion.a
+              href="/Holiakhovskyi Yevhen — SDET Lead.pdf"
+              download
+              onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{
@@ -113,7 +113,7 @@ export default function Navbar() {
             >
               <FiDownload size={16} />
               Download PDF
-            </motion.button>
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
