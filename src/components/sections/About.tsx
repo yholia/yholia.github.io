@@ -3,8 +3,6 @@ import {useEffect, useState} from "react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GlassCard from "@/components/ui/GlassCard";
 import {useInViewOnce} from "@/hooks/useInViewOnce";
-import {usePrintMode} from "@/contexts/PrintContext";
-
 interface AboutProps {
   text: string;
 }
@@ -19,7 +17,6 @@ interface StatProps {
 }
 
 function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProps) {
-  const isPrinting = usePrintMode();
   const count = useMotionValue(0);
   const [displayValue, setDisplayValue] = useState(0);
 
@@ -38,7 +35,7 @@ function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProp
   return (
     <GlassCard className="text-center" accent={accent}>
       <div className={`mb-1 font-display text-3xl font-bold ${accent === "teal" ? "text-gradient-teal" : "text-gradient-warm"}`}>
-        {isPrinting ? value : displayValue}
+        {displayValue}
         <span>{suffix}</span>
       </div>
       <p className="font-mono text-xs uppercase tracking-wider text-text-muted">{label}</p>
@@ -54,7 +51,6 @@ const stats: { value: number; suffix: string; label: string; accent: "teal" | "w
 ];
 
 export default function About({ text }: AboutProps) {
-  const isPrinting = usePrintMode();
   const { ref, isInView } = useInViewOnce();
 
   const heading = (
@@ -74,19 +70,15 @@ export default function About({ text }: AboutProps) {
   return (
     <section id="about" className="section-divider relative px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
-        {isPrinting ? (
-          <div className="mb-10 md:mb-14">{heading}</div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-10 md:mb-14"
-          >
-            {heading}
-          </motion.div>
-        )}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 md:mb-14"
+        >
+          {heading}
+        </motion.div>
 
         <div className="grid items-start gap-12 md:grid-cols-[1.3fr_1fr]">
           <AnimatedSection direction="left">

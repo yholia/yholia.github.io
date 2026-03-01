@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiDownload } from "react-icons/fi";
-import { useTriggerPrint } from "@/contexts/PrintContext";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -18,7 +17,6 @@ const navLinks = [
 export default function Navbar() {
   const { isScrolled } = useScrollProgress();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const triggerPrint = useTriggerPrint();
 
   return (
     <>
@@ -56,7 +54,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <button
-              onClick={triggerPrint}
+              onClick={() => window.print()}
               aria-label="Download PDF"
               className="ml-2 flex items-center gap-1.5 rounded-md border border-accent/20 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
@@ -102,7 +100,7 @@ export default function Navbar() {
             <motion.button
               onClick={() => {
                 setMobileOpen(false);
-                triggerPrint();
+                window.print();
               }}
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}

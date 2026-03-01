@@ -1,7 +1,6 @@
 import { motion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
-import { usePrintMode } from "@/contexts/PrintContext";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -27,12 +26,7 @@ export default function AnimatedSection({
   className,
   once = true,
 }: AnimatedSectionProps) {
-  const isPrinting = usePrintMode();
   const offset = offsets[direction];
-
-  if (isPrinting) {
-    return <div className={cn(className)}>{children}</div>;
-  }
 
   const variants: Variants = {
     hidden: { opacity: 0, ...offset },

@@ -61,7 +61,6 @@ export default function Contact({ personal }: ContactProps) {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="hidden items-center justify-center md:flex"
-          data-print-hide
         >
           <div className="relative h-56 w-56">
             <motion.div

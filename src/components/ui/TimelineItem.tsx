@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import type { Experience } from "@/data/types";
 import GlassCard from "./GlassCard";
-import { usePrintMode } from "@/contexts/PrintContext";
 
 interface TimelineItemProps {
   experience: Experience;
@@ -12,7 +11,6 @@ export default function TimelineItem({
   experience,
   index,
 }: TimelineItemProps) {
-  const isPrinting = usePrintMode();
   const isEven = index % 2 === 0;
 
   const cardContent = (
@@ -77,21 +75,6 @@ export default function TimelineItem({
       isEven ? "border-accent bg-accent/20" : "border-accent-warm bg-accent-warm/20"
     }`} />
   );
-
-  if (isPrinting) {
-    return (
-      <div
-        className={`relative flex w-full items-start ${
-          isEven ? "md:justify-start" : "md:justify-end"
-        }`}
-      >
-        <div className="absolute left-4 top-6 z-10 md:left-1/2 md:-translate-x-1/2">
-          {dot}
-        </div>
-        <div className={cardClass}>{cardContent}</div>
-      </div>
-    );
-  }
 
   return (
     <div

@@ -9,14 +9,12 @@ import Projects from "@/components/sections/Projects";
 import Education from "@/components/sections/Education";
 import Certifications from "@/components/sections/Certifications";
 import Contact from "@/components/sections/Contact";
-import { PrintProvider } from "@/contexts/PrintContext";
 
 export default function App() {
     return (
-        <PrintProvider>
         <div className="noise-overlay min-h-screen bg-bg-primary text-text-primary">
             {/* Floating gradient mesh blobs */}
-            <div className="pointer-events-none fixed inset-0 z-0" data-print-hide>
+            <div className="pointer-events-none fixed inset-0 z-0">
                 <div
                     className="absolute -left-32 top-1/4 h-[500px] w-[500px] rounded-full bg-accent/[0.04] blur-[120px]"/>
                 <div
@@ -42,6 +40,5 @@ export default function App() {
             </main>
             <Footer socials={cvData.personal.socials}/>
         </div>
-        </PrintProvider>
     );
 }

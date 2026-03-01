@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
-import { usePrintMode } from "@/contexts/PrintContext";
 
 interface SectionWrapperProps {
   id: string;
@@ -20,8 +19,6 @@ export default function SectionWrapper({
   className,
   accent = "teal",
 }: SectionWrapperProps) {
-  const isPrinting = usePrintMode();
-
   const headerContent = (
     <>
       <div className="flex items-center gap-4 mb-3">
@@ -51,19 +48,15 @@ export default function SectionWrapper({
       className={cn("section-divider relative px-6 py-16 md:py-24", className)}
     >
       <div className="mx-auto max-w-6xl">
-        {isPrinting ? (
-          <div className="mb-10 md:mb-14">{headerContent}</div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
-            className="mb-10 md:mb-14"
-          >
-            {headerContent}
-          </motion.div>
-        )}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 md:mb-14"
+        >
+          {headerContent}
+        </motion.div>
         {children}
       </div>
     </section>

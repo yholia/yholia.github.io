@@ -3,8 +3,6 @@ import type { PersonalInfo } from "@/data/types";
 import Typewriter from "@/components/ui/Typewriter";
 import ParticleBackground from "@/components/ui/ParticleBackground";
 import SocialLinks from "@/components/ui/SocialLinks";
-import { usePrintMode } from "@/contexts/PrintContext";
-
 interface HeroProps {
   personal: PersonalInfo;
 }
@@ -84,46 +82,17 @@ function GeometricVisual() {
 }
 
 export default function Hero({ personal }: HeroProps) {
-  const isPrinting = usePrintMode();
-
-  if (isPrinting) {
-    return (
-      <section id="hero" className="relative px-6 py-12">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="h-px w-8 bg-accent" />
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-              {personal.title}
-            </span>
-          </div>
-          <h1 className="mb-2 font-display text-4xl font-extrabold leading-[1.05] tracking-tight">
-            <span className="text-gradient-teal">{personal.name.split(" ")[0]}</span>
-            {" "}
-            <span className="text-text-primary">{personal.name.split(" ").slice(1).join(" ")}</span>
-          </h1>
-          <div className="mb-4 font-mono text-sm text-text-secondary">
-            Test Automation Architect
-          </div>
-          <p className="mb-6 max-w-md text-sm leading-relaxed text-text-muted">
-            {personal.tagline}
-          </p>
-          <SocialLinks socials={personal.socials} />
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden px-6"
     >
-      <div data-print-hide>
+      <div>
         <ParticleBackground count={35} />
       </div>
 
       {/* Grid pattern overlay */}
-      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" data-print-hide />
+      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
 
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
         {/* Text — left-aligned, not centered */}
@@ -221,7 +190,6 @@ export default function Hero({ personal }: HeroProps) {
             delay: 0.3,
           }}
           className="flex justify-center"
-          data-print-hide
         >
           <GeometricVisual />
         </motion.div>
