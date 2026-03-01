@@ -122,3 +122,117 @@
   );
 }
 
+/* ===== Print / PDF export ===== */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  /* Light theme on root elements */
+  html,
+  body,
+  #root,
+  #root > div {
+    background: white !important;
+    color: #1a1a1a !important;
+    font-size: 11px !important;
+    overflow: visible !important;
+  }
+
+  /*
+   * Override Motion.js inline opacity / transform so elements that haven't
+   * animated into view yet (off-screen at print time) still appear.
+   * background-color: transparent lets the white html bg show through.
+   */
+  * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-color: transparent !important;
+  }
+
+  /* Restore white page background after the wildcard above clears it */
+  html {
+    background: white !important;
+  }
+
+  /* Hide decorative / interactive chrome */
+  nav,
+  footer,
+  .noise-overlay::before,
+  .section-divider::after,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  /* Gradient text → solid dark */
+  .text-gradient-teal,
+  .text-gradient-warm,
+  .text-gradient-mixed {
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    color: #1a1a1a !important;
+  }
+
+  /* Text colour utilities */
+  [class*="text-text-primary"]   { color: #1a1a1a !important; }
+  [class*="text-text-secondary"] { color: #374151 !important; }
+  [class*="text-text-muted"]     { color: #6b7280 !important; }
+  [class*="text-accent"]         { color: #007a63 !important; }
+
+  /* Border colours */
+  [class*="border-"] { border-color: #d1d5db !important; }
+
+  /* Links */
+  a {
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+  }
+
+  /* Hero: collapse full-screen section to a compact header */
+  #hero {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 6mm 0 4mm !important;
+  }
+
+  /* Compact section padding */
+  section {
+    padding: 3mm 0 !important;
+  }
+
+  /* Avoid page breaks inside cards */
+  [class*="rounded-xl"],
+  [class*="rounded-2xl"] {
+    break-inside: avoid;
+  }
+
+  /* Skill bar track — light gray */
+  [class*="bg-bg-elevated"] {
+    background-color: #e5e7eb !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /*
+   * Skill bar fill — Motion uses width animation; the CSS var --bar-fill
+   * holds the target percentage so the bar is always correct in print
+   * even if the element hadn't scrolled into view yet.
+   */
+  .skill-bar-fill {
+    width: var(--bar-fill) !important;
+    background: #374151 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+

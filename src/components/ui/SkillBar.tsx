@@ -1,5 +1,6 @@
 import { motion, useMotionValue, animate } from "motion/react";
 import { useEffect, useState } from "react";
+import type React from "react";
 import { useInViewOnce } from "@/hooks/useInViewOnce";
 
 interface SkillBarProps {
@@ -38,15 +39,18 @@ export default function SkillBar({ name, level, delay = 0, accent = "teal" }: Sk
         <span className="font-medium text-text-primary transition-colors group-hover:text-accent">
           {name}
         </span>
-        <span className="font-mono text-text-muted">{displayValue}</span>
+        <span className="font-mono text-text-muted">{isInView ? displayValue : level}</span>
       </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
+      {/* --bar-fill lets @media print set the correct width via CSS var */}
+      <div
+        className="h-1.5 overflow-hidden rounded-full bg-bg-elevated"
+        style={{ "--bar-fill": `${level}%` } as React.CSSProperties}
+      >
         <motion.div
-          className={`h-full rounded-full bg-gradient-to-r ${gradientClass}`}
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: level / 100 } : { scaleX: 0 }}
+          className={`skill-bar-fill h-full rounded-full bg-gradient-to-r ${gradientClass}`}
+          initial={{ width: 0 }}
+          animate={isInView ? { width: `${level}%` } : { width: 0 }}
           transition={{ duration: 1, delay, ease: "easeOut" }}
-          style={{ originX: 0 }}
         />
       </div>
     </div>

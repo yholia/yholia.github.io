@@ -35,7 +35,7 @@ function StatCounter({ value, suffix, label, delay, isInView, accent }: StatProp
   return (
     <GlassCard className="text-center" accent={accent}>
       <div className={`mb-1 font-display text-3xl font-bold ${accent === "teal" ? "text-gradient-teal" : "text-gradient-warm"}`}>
-        {displayValue}
+        {isInView ? displayValue : value}
         <span>{suffix}</span>
       </div>
       <p className="font-mono text-xs uppercase tracking-wider text-text-muted">{label}</p>
