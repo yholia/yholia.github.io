@@ -93,7 +93,7 @@ export default function TimelineItem({
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+        initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}

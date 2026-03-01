@@ -9,7 +9,7 @@ interface HeroProps {
 
 function GeometricVisual() {
   return (
-    <div className="relative h-80 w-80 md:h-[420px] md:w-[420px]">
+    <div className="relative h-64 w-64 md:h-[420px] md:w-[420px]">
       {/* Outer rotating ring */}
       <motion.div
         animate={{ rotate: 360 }}
@@ -95,13 +95,13 @@ export default function Hero({ personal }: HeroProps) {
       <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" data-print-hide />
 
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
-        {/* Text — left-aligned, not centered */}
-        <div>
+        {/* Text — centered on mobile, left-aligned on md+ */}
+        <div className="text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-4 flex items-center gap-3"
+            className="mb-4 flex items-center justify-center gap-3 md:justify-start"
           >
             <div className="h-px w-8 bg-accent" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
@@ -153,7 +153,7 @@ export default function Hero({ personal }: HeroProps) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="mb-8 flex flex-wrap gap-3"
+            className="mb-8 flex flex-wrap justify-center gap-3 md:justify-start"
             data-print-hide
           >
             <a
@@ -176,7 +176,7 @@ export default function Hero({ personal }: HeroProps) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.1 }}
           >
-            <SocialLinks socials={personal.socials} />
+            <SocialLinks socials={personal.socials} className="justify-center md:justify-start" />
           </motion.div>
         </div>
 
